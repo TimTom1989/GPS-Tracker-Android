@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ff151515">
+
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/lat"
+        android:textColor="#ff0a0a0a"
+        android:autoText="false"
+        android:background="#ffffffff"
+        android:layout_below="@+id/prov"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/lon"
+        android:textColor="#fff0f0f0"
+        android:background="#ff0e0e0e"
+        android:layout_below="@+id/lat"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:id="@+id/prov"
+        android:textColor="#fff3f3f3"
+        android:background="#ff040404"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="500dp"
+        android:layout_height="60dp"
+        android:id="@+id/choice"
+        android:background="#ffffffff"
+        android:layout_below="@+id/lon"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#ff0a0a0a" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seç"
+        android:id="@+id/fineAccuracy"
+        android:layout_below="@+id/choice"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="45dp"
+        android:textColor="#ffffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GPS"
+        android:id="@+id/chooseRadio"
+        android:layout_below="@+id/fineAccuracy"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="38dp" />
+</RelativeLayout>

@@ -1,6 +1,7 @@
 package com.emre.gps;
 
 import android.app.*;
+import android.content.*;
 import android.os.*;
 
 public class MainActivity extends Activity 
@@ -10,5 +11,14 @@ public class MainActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+		
+		
+		Intent i = new Intent(MainActivity.this, LocationService.class);
+        MainActivity.this.startService(i);
+		
+		
+		
+		
+		
     }
 }
