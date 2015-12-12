@@ -45,7 +45,7 @@ public class LocationService extends Service
         try
         {
             con = new FTPClient();
-            con.connect("ftp.server.com");
+            con.connect("ftp.server.com"); //your ftp info
 
             if (con.login("username", "pass"))
             {
