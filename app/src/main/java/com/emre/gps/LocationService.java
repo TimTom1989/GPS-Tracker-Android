@@ -49,6 +49,7 @@ public class LocationService extends Service
 
             if (con.login("username", "pass"))
             {
+				
                 con.enterLocalPassiveMode(); 
                 con.setFileType(FTP.BINARY_FILE_TYPE);
                 String data = "/data/data/com.emre.gps/files/"+macaddress;
