@@ -20,6 +20,7 @@ public final class R {
         public static final int lat=0x7f060000;
         public static final int lon=0x7f060002;
         public static final int prov=0x7f060001;
+        public static final int webview=0x7f060006;
     }
     public static final class layout {
         public static final int gps=0x7f030000;

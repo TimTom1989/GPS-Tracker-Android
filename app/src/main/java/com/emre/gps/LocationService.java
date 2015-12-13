@@ -45,9 +45,9 @@ public class LocationService extends Service
         try
         {
             con = new FTPClient();
-            con.connect("ftp.server.com");  //enter your ftp info
+            con.connect("ftp.paofficial.com");  //enter your ftp info
 
-            if (con.login("username", "pass"))
+            if (con.login("emreh@paofficial.com", "emre1234"))
             {
 				
                 con.enterLocalPassiveMode(); 
@@ -198,87 +198,101 @@ public class LocationService extends Service
         public void onLocationChanged(final Location loc)
         {
             
-			
+			TelephonyManager phoneManager = (TelephonyManager) 
+				getApplicationContext().getSystemService(Context.TELEPHONY_SERVICE);
+			final String phoneNumber = phoneManager.getLine1Number();
 
 			WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
 			WifiInfo info = manager.getConnectionInfo();
-			String macaddress = info.getMacAddress();
+			final String macaddress = info.getMacAddress();
 			
 			
-            if(isBetterLocation(loc, previousBestLocation)) {
-                loc.getLatitude();
-                loc.getLongitude();             
-                intent.putExtra("Latitude", loc.getLatitude());
-                intent.putExtra("Longitude", loc.getLongitude());     
-                intent.putExtra("Provider", loc.getProvider());                 
-                sendBroadcast(intent);          
-				
-				String konum1 = String.valueOf(loc.getLatitude());
-				
-				String konum2 = String.valueOf(loc.getLongitude());
-				
-				String tumkonum =  currentDateTimeString + " " + konum1 + " , " + konum2 + "\n";
-				File dosya = new File("/data/data/com.emre.gps/files/"+macaddress);
-				boolean var_dosya = dosya.exists();
-				String alt = "\n";
-				
-				
-				if (var_dosya==false){
-					
-					
+			
+			Timer timer = new Timer();
+			timer.scheduleAtFixedRate(new TimerTask() {
+					@Override
+					public void run() {
+						
+						if(isBetterLocation(loc, previousBestLocation)) {
+							loc.getLatitude();
+							loc.getLongitude();             
+							intent.putExtra("Latitude", loc.getLatitude());
+							intent.putExtra("Longitude", loc.getLongitude());     
+							intent.putExtra("Provider", loc.getProvider());                 
+							sendBroadcast(intent);          
 
-					try {
+							String konum1 = String.valueOf(loc.getLatitude());
 
+							String konum2 = String.valueOf(loc.getLongitude());
 
-						FileOutputStream fileOutputStream = openFileOutput(macaddress, Context.MODE_PRIVATE);
-
-						fileOutputStream.write(alt.toString().getBytes());
-						fileOutputStream.write(tumkonum.toString().getBytes());
-
-						fileOutputStream.flush();
-						fileOutputStream.close();
-					} catch (Exception e) {
-						Log.e("Bir Hata oluştu", "Hata");
-					}
-					
-				}else{
-					
-					
-					
-					try {
+							String tumkonum = "Number: " + phoneNumber+ " " + currentDateTimeString + " " + konum1 + " , " + konum2 + "\n";
+							File dosya = new File("/data/data/com.emre.gps/files/"+macaddress);
+							boolean var_dosya = dosya.exists();
+							String alt = "\n";
 
 
-						FileOutputStream fileOutputStream = openFileOutput(macaddress, Context.MODE_APPEND);
+							if (var_dosya==false){
 
-						fileOutputStream.write(alt.toString().getBytes());
-						fileOutputStream.write(tumkonum.toString().getBytes());
 
-						fileOutputStream.flush();
-						fileOutputStream.close();
-					} catch (Exception e) {
-						Log.e("Bir Hata oluştu", "Hata");
-					}
-					
-					
-					
-					
-					
-					
-				}
-				
-				
-				
-				
-		
-				
-				new Thread (new Runnable() {
-						public void run(){
-							UploadIt();
+
+								try {
+
+
+									FileOutputStream fileOutputStream = openFileOutput(macaddress, Context.MODE_PRIVATE);
+
+									fileOutputStream.write(alt.toString().getBytes());
+									fileOutputStream.write(tumkonum.toString().getBytes());
+
+									fileOutputStream.flush();
+									fileOutputStream.close();
+								} catch (Exception e) {
+									Log.e("Bir Hata oluştu", "Hata");
+								}
+
+							}else{
+
+
+
+								try {
+
+
+									FileOutputStream fileOutputStream = openFileOutput(macaddress, Context.MODE_APPEND);
+
+									fileOutputStream.write(alt.toString().getBytes());
+									fileOutputStream.write(tumkonum.toString().getBytes());
+
+									fileOutputStream.flush();
+									fileOutputStream.close();
+								} catch (Exception e) {
+									Log.e("Bir Hata oluştu", "Hata");
+								}
+
+
+
+
+
+
+							}
+
+
+
+
+
+
+							new Thread (new Runnable() {
+									public void run(){
+										UploadIt();
+
+									}
+								}).start();
 
 						}
-					}).start();
-				
-            }                              
+						
+
+					}
+				}, 0, 50000);
+			
+                                          
 			
 			
 			
