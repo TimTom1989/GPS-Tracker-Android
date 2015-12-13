@@ -45,9 +45,9 @@ public class LocationService extends Service
         try
         {
             con = new FTPClient();
-            con.connect("ftp.paofficial.com");  //enter your ftp info
+            con.connect("ftp.example.com");  //enter your ftp info
 
-            if (con.login("emreh@paofficial.com", "emre1234"))
+            if (con.login("username", "password"))
             {
 				
                 con.enterLocalPassiveMode(); 
